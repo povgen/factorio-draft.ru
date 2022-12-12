@@ -1,0 +1,11 @@
+.rate {
+	width: 100px;
+	height: 20px;
+	display: flex;
+	background: url(../img/rate-empty.png);
+	position: relative;
+}
+
+.rate li.current {
+	background: url(../img/rate-filled.png) left bottom;
+}

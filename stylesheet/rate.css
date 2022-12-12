@@ -1,0 +1,55 @@
+.rate {
+	width: 100px;
+	height: 20px;
+	display: flex;
+	background: url(../img/rate-empty.png);
+	position: relative;
+}
+
+.rate li.current {
+	background: url(../img/rate-filled.png) left bottom;
+}
+
+.rate li span[class*="star"]{
+	z-index: 5;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	display: block;
+}
+.rate li span[class*="star"]:hover {
+	left: 0;
+	z-index: 2;
+	background: url(../img/rate-filled.png) left;
+}
+.rate li span.star1 {
+	left: 0;
+}
+.rate li span.star1:hover {
+	width: 20px;
+}
+.rate li span.star2 {
+	left: 20px;
+}
+.rate li span.star2:hover {
+	width: 40px;
+}
+.rate li span.star3 {
+	left: 40px;
+}
+.rate li span.star3:hover {
+	width: 60px;
+}
+.rate li span.star4 {
+	left: 60px;
+}
+.rate li span.star4:hover {
+	width: 80px;
+}
+.rate li span.star5 {
+	left: 80px;
+}
+.rate li span.star5:hover {
+	width: 100px;
+}

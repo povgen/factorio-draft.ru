@@ -1,0 +1,48 @@
+section {
+	height: auto;
+	width: auto;
+	text-align: center;
+	max-width: 98%;
+}
+img {
+	height: auto;
+	width: auto;
+	display: block;
+	margin: auto !important;
+}
+article.comment {
+	float: none;
+	padding: 10px;
+}
+article.comment section {
+	text-align: left;
+	width: 100%;
+	float: none;
+	margin:0;
+	margin-top: 10px;
+	
+}
+
+article.comment section form {
+	width: 100%;
+	text-align: left;
+	float: none;
+}
+article.comment section p {
+	margin-left: 10px;
+}
+article.comment section h3 {
+	font-size: 1.1em;
+}
+article.comment section form textarea {
+	float: none;
+	height: 100px;
+	/*width: 100%;*/
+	resize: none;
+	scroll-behavior: unset;
+	overflow: hidden;
+	/*background: gray;*/
+}
+article.comment section form button {
+	width: 425px;
+}
