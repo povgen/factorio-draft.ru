@@ -1,0 +1,5 @@
+<?php
+require 'Migration.php';
+use database\core\Migration;
+
+Migration::migrate();
