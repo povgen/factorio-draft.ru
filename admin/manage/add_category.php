@@ -9,7 +9,7 @@ if (isset($_GET['name'])) {
 	R::store($cat);
 	$category_id = R::getCol('SELECT `id` FROM `category` ORDER BY `id` DESC')[0];
 	$artId = $_GET['article_id'];
-	$catArt = R::load('articls',$artId);
+	$catArt = R::load('articles',$artId);
 	$catArt->category_id = $category_id;
 	var_dump($category_id);
 	R::store($catArt);

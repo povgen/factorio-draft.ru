@@ -23,10 +23,10 @@ $_SESSION['url'] = 'http://factorio-draft.ru/';
 			
 
 <?php  
-		$arrid = R::getCol("SELECT * FROM `articls` ORDER BY  `id` DESC LIMIT 10");
+		$arrid = R::getCol("SELECT * FROM `articles` ORDER BY  `id` DESC LIMIT 10");
 
 	foreach ($arrid as $id) {
-		$bean = R::load('articls',$id);
+		$bean = R::load('articles',$id);
 		$title = $bean['title'];
 		if ((strlen($bean['description']) < 500)) {
 			$description = $bean['description'];

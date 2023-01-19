@@ -1,5 +1,21 @@
 <?php
 require 'Migration.php';
 use database\core\Migration;
+switch ($argv[1] ?? ''){
+	case 'migration':
+		switch ($argv[2] ?? '') {
+			case 'create' : Migration::create($argv[3] ?? 'migration'); break;
+			case 'migrate': Migration::migrate($argv[3] ?? null); 	  break;
+			case 'rollback': Migration::rollback($argv[3] ?? 0); 	 	  break;
+			case 'list':
+				$list = Migration::getList($argv[3] ?? 0);
+				foreach ($list as $item)
+					echo $item['file_name'].'.......'.($item['is_performed'] ? 'ran' : 'pending').PHP_EOL;
+			break;
+			default: echo 'gg';
+		}
+	break;
+	default: echo 'command not found!';
+}
 
-Migration::migrate();
+

@@ -1,7 +1,7 @@
 <?php
 require '../limb/connect.php';
 $id = $_SESSION['id'];
-$bean = R::load('articls',$id);
+$bean = R::load('articles',$id);
 $title = $bean['title'];
 $description = $bean['description'];
 $code = $bean['code'];
@@ -57,21 +57,21 @@ $data = $_POST;
 $file = $_FILES;
 
 if (isset($data['do_add'])) {
-		$article = R::dispense('articls');
+		$article = R::dispense('articles');
 		$article->id = $id;
 		$article->title = $data['title'];
 		$article->description = $data['description'];
 		$article->code = $data['code'];
 		$article->author = $author;
 		echo '<script type="text/javascript"> alert("Чертёж обновлён.") </script>';
-		$chek = R::findOne('articls','imgurl = ?',array($file['load']['name'])); //проверка на уникальность имени файла
+		$chek = R::findOne('articles','imgurl = ?',array($file['load']['name'])); //проверка на уникальность имени файла
 
 if ($chek) {// если файл не уникален, он добавляет к началу имени файла id
 	$id = 1;
 	do {
 		$fName = $i.$file['load']['name'];	
 		$i++;
-		$chek_r = R::findOne('articls','imgurl = ?',array($fName));
+		$chek_r = R::findOne('articles','imgurl = ?',array($fName));
 	} while ( $chek_r);
 } else {
 	$fName = $file['load']['name'];

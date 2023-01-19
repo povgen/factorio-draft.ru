@@ -22,9 +22,9 @@ require '../blocks/forma.php';
 <?php  
 if (isset($_SESSION['logged_user'])) {
 	$author_id = $_SESSION['logged_user']['id'];
-	$arrid = R::getCol("SELECT * FROM `articls` WHERE `author_id` = ?",array($author_id));
+	$arrid = R::getCol("SELECT * FROM `articles` WHERE `author_id` = ?",array($author_id));
 	foreach ($arrid as $id) {
-		$bean = R::load('articls',$id);
+		$bean = R::load('articles',$id);
 		$title = $bean['title'];
 		if ((strlen($bean['description']) < 500)) {
 			$description = $bean['description'];

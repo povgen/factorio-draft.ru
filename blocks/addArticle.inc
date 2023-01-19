@@ -30,21 +30,21 @@ $file = $_FILES;
 
 
 if (isset($data['do_add'])) {
-		$article = R::dispense('articls');
+		$article = R::dispense('articles');
 		$article->title = $data['title'];
 		$article->description = $data['description'];
 		$article->code = $data['code'];
 		$article->category_id = $_POST['category'];
 		$article->author_id = $_SESSION['logged_user']->id;
 		echo '<script type="text/javascript"> alert("Чертёж добавлен.") </script>';
-		$chek = R::findOne('articls','imgurl = ?',array($file['load']['name'])); //проверка на уникальность имени файла
+		$chek = R::findOne('articles','imgurl = ?',array($file['load']['name'])); //проверка на уникальность имени файла
 
 if ($chek) {// если файл не уникален, он добавляет к началу имени файла id
 	$id = 1;
 	do {
 		$fName = $id.$file['load']['name'];
 		$id++;
-		$chek_r = R::findOne('articls','imgurl = ?',array($fName));
+		$chek_r = R::findOne('articles','imgurl = ?',array($fName));
 	} while ( $chek_r);
 } else {
 	$fName = $file['load']['name'];
@@ -60,7 +60,7 @@ if (!empty($file['load']['name'])){
 		$article->imgurl = $fName;
 		R::store($article);
 		if ($_POST['category'] == 0) {
-		$id = R::getCol('SELECT `id` FROM `articls` ORDER BY `id` DESC');
+		$id = R::getCol('SELECT `id` FROM `articles` ORDER BY `id` DESC');
 			echo "<script>var answer = confirm('Хотите добавить категорию?');
 				if (answer){
 					var nameCat = prompt('Введите название категории');

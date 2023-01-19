@@ -8,7 +8,7 @@
 <?php 
 require 'timer.inc';
 echo '<p>Зарегестрированных пользователей: '.R::count('users').'</p>';
-echo '<p>Всего чертежей на сайте: '.R::count('articls').'</p>';
+echo '<p>Всего чертежей на сайте: '.R::count('articles').'</p>';
 R::close(); 
 ?>
 

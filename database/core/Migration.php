@@ -5,16 +5,18 @@ require 'IMigration.php';
 
 class Migration
 {
-	public static function create($name): void
+	public static function create(string $name): void
 	{
 		$time_spot = date('Y_m_d').'_'.(time() - strtotime('today'));
 		$tmpl = file_get_contents('migrationTemplate.php');
 		file_put_contents('../migrations/'.$time_spot.'_'.$name.'.php', $tmpl);
+
+		echo 'migrate file has created!';
 	}
 
-	public static function getList(): array {
+	public static function getList(bool $is_asc = true): array {
 		self::CreateMigrationTableIfNotExist();
-		$files = scandir('../migrations/');
+		$files = scandir('../migrations/', $is_asc ? 0 : 1);
 		$files = array_filter($files, fn($el) =>  preg_match('/.*\.php/', $el));
 
 		$performed_migrations = DB::run('SELECT * FROM migrations ORDER BY file_name');
@@ -42,7 +44,7 @@ class Migration
 		)");
 	}
 
-	public static function migrate($file_name = false): void
+	public static function migrate(string $file_name = null): void
 	{
 		$migrations = self::getList();
 		if ($file_name) $migrations = array_filter($migrations, fn($el) => $el['file_name'] == $file_name); //Если указано имя, то отфильтруем оставшиеся миграции
@@ -68,7 +70,29 @@ class Migration
 		echo 'success: migrate completed';
 	}
 
-	public static function rollback($file_name) {
-		//todo откат миграции
+	public static function rollback(int $count = 0): void
+	{
+		self::CreateMigrationTableIfNotExist();
+
+		$migrations = DB::run('SELECT * FROM migrations ORDER BY file_name DESC LIMIT '.$count);
+
+		foreach ($migrations as $migration) {
+			DB::startTransaction();
+			try {
+				(require '../migrations/'.$migration['file_name'])->down();
+				echo $migration['file_name'].' is done rollback'.PHP_EOL;
+				DB::run('DELETE FROM migrations WHERE id = ?', [$migration['id']]);
+				DB::commitTransaction();
+
+			} catch (\Exception $e) {
+				echo 'Error in '.$migration['file_name'].':'.PHP_EOL;
+				echo $e->getMessage();
+				DB::rollbackTransaction();
+				return;
+			}
+		}
+
+		echo 'success: rollback completed';
+
 	}
 }

@@ -38,37 +38,37 @@ $_SESSION['url'] = "http://factorio-draft.ru/pages/libray.php";
 		if (isset($_POST['category'])) {
 			switch ($_POST['sort']) {
 			case '2':
-			$arrid = R::getCol("SELECT * FROM `articls` WHERE `category_id` = ? ORDER BY  `title` DESC ",array($_POST['category']));
+			$arrid = R::getCol("SELECT * FROM `articles` WHERE `category_id` = ? ORDER BY  `title` DESC ",array($_POST['category']));
 				break;
 			case '3':
-			$arrid = R::getCol("SELECT * FROM `articls` WHERE `category_id` = ? ORDER BY  `date` DESC  ",array($_POST['category']));
+			$arrid = R::getCol("SELECT * FROM `articles` WHERE `category_id` = ? ORDER BY  `date` DESC  ",array($_POST['category']));
 				break;
 			case '4':
-			$arrid = R::getCol("SELECT * FROM `articls` WHERE `category_id` = ? ORDER BY  `date`  ",array($_POST['category']));
+			$arrid = R::getCol("SELECT * FROM `articles` WHERE `category_id` = ? ORDER BY  `date`  ",array($_POST['category']));
 				break;
 			
 			default:
-			$arrid = R::getCol("SELECT * FROM `articls` WHERE `category_id` = ? ORDER BY  `title`  ",array($_POST['category']));
+			$arrid = R::getCol("SELECT * FROM `articles` WHERE `category_id` = ? ORDER BY  `title`  ",array($_POST['category']));
 				break;
 			}
 		} else {
 			switch ($_POST['sort']) {
 				case '2':
-				$arrid = R::getCol("SELECT * FROM `articls` ORDER BY  `title` DESC ");
+				$arrid = R::getCol("SELECT * FROM `articles` ORDER BY  `title` DESC ");
 					break;
 				case '3':
-				$arrid = R::getCol("SELECT * FROM `articls` ORDER BY  `date` DESC ");
+				$arrid = R::getCol("SELECT * FROM `articles` ORDER BY  `date` DESC ");
 					break;
 				case '4':
-				$arrid = R::getCol("SELECT * FROM `articls` ORDER BY  `date` ");
+				$arrid = R::getCol("SELECT * FROM `articles` ORDER BY  `date` ");
 					break;
 				default:
-				$arrid = R::getCol("SELECT * FROM `articls` ORDER BY  `title` ");
+				$arrid = R::getCol("SELECT * FROM `articles` ORDER BY  `title` ");
 					break;
 			}
 		}
 	foreach ($arrid as $id) {
-		$bean = R::load('articls',$id);
+		$bean = R::load('articles',$id);
 		$title = $bean['title'];
 		if ((strlen($bean['description']) < 500)) {
 			$description = $bean['description'];

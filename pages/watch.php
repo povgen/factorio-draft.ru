@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged_user'])){
 }
 
 $id = $_GET['id'];
-$bean = R::load('articls',$id);
+$bean = R::load('articles',$id);
 		$title = $bean['title'];
 		$description = $bean['description'];
 		$code = $bean['code'];

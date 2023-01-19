@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `articls`
+-- Структура таблицы `articles`
 --
 
-CREATE TABLE `articls` (
+CREATE TABLE `articles` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `articls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `articls`
+-- Дамп данных таблицы `articles`
 --
 
-INSERT INTO `articls` (`id`, `title`, `description`, `code`, `category_id`, `author_id`, `imgurl`) VALUES
+INSERT INTO `articles` (`id`, `title`, `description`, `code`, `category_id`, `author_id`, `imgurl`) VALUES
 (1, '213', '123', '213', NULL, 7, 'default.png'),
 (2, 'test', 'sdf', 'sdf', NULL, 12, 'default.png');
 
@@ -122,12 +122,12 @@ INSERT INTO `users` (`id`, `name`, `login`, `password`) VALUES
 --
 
 --
--- Индексы таблицы `articls`
+-- Индексы таблицы `articles`
 --
-ALTER TABLE `articls`
+ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `index_foreignkey_articls_category` (`category_id`),
-  ADD KEY `index_foreignkey_articls_author` (`author_id`);
+  ADD KEY `index_foreignkey_articles_category` (`category_id`),
+  ADD KEY `index_foreignkey_articles_author` (`author_id`);
 
 --
 -- Индексы таблицы `comment`
@@ -154,9 +154,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `articls`
+-- AUTO_INCREMENT для таблицы `articles`
 --
-ALTER TABLE `articls`
+ALTER TABLE `articles`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `comment`
