@@ -90,9 +90,7 @@ if( isset($data['do_login']) ) {// авторизация (начало кода
 
 ?>
 
-		<form method="POST" action="
-		<?php echo $_COOKIE['url'] ?>
-		" align="middle"/>
+		<form method="POST" action="<?= $_SESSION['url'] ?>" align="middle">
 
 			<div class="hide">
 				<span>Ваше имя</span>
