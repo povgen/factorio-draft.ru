@@ -15,7 +15,7 @@ $_SESSION['url'] = "http://factorio-draft.ru/pages/libray.php";
 		</header>
 		<main>
 			<article>
-				<form class="sort" method="POST" action="libray.php">
+				<form class="sort" method="POST" action="library.php">
 					<select name="category" id="">
 						<option value="">Показать все категории</option>
 						<?php 

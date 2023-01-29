@@ -82,7 +82,7 @@ $_SESSION['url'] = 'http://factorio-draft.ru/';
 			<?php 
 
  if (($_SESSION['logged_user']['id'] == 0)&&(isset($_SESSION['logged_user']['id']))) { 
- 	echo 
+ 	echo
 	 	"<script>var conf = confirm(\"Перейти в панель администратора?\");
 	 	if (conf) window.location.href='http://factorio-draft.ru/admin';</script>";
 	}
