@@ -1,4 +1,5 @@
 <?php
+require '../db_config.php';
 require 'Migration.php';
 use database\core\Migration;
 switch ($argv[1] ?? ''){

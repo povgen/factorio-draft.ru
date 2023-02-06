@@ -15,13 +15,13 @@ return new class implements IMigration {
 	{
 		$sqls = [
 			'CREATE TABLE users (
-				  id 		int(11) UNSIGNED PRIMARY KEY,
+				  id 		int(11) UNSIGNED PRIMARY KEY auto_increment,
 				  name 		varchar(191)  DEFAULT NULL,
 				  login 	varchar(191)  NOT NULL,
 				  password 	varchar(191)  NOT NULL 
 				)',
 			'CREATE TABLE articles (
-				  id 			int(11) UNSIGNED PRIMARY KEY,
+				  id 			int(11) UNSIGNED PRIMARY KEY auto_increment,
 				  title 		varchar(191) NOT NULL,
 				  description 	varchar(191) DEFAULT \'\',
 				  code 			varchar(191) NOT NULL,
@@ -30,13 +30,13 @@ return new class implements IMigration {
 				  imgurl 		varchar(191) DEFAULT NULL
 				)',
 			'CREATE TABLE comment (
-				  id 		int(11) UNSIGNED PRIMARY KEY,
+				  id 		int(11) UNSIGNED PRIMARY KEY auto_increment,
 				  text 		text NOT NULL,
 				  art_id 	int(11) UNSIGNED REFERENCES articles(id),
 				  user_id 	int(11) UNSIGNED REFERENCES users(id)
 				)',
 			'CREATE TABLE rate (
-				  id 			int(11) UNSIGNED PRIMARY KEY,
+				  id 			int(11) UNSIGNED PRIMARY KEY auto_increment,
 				  id_user 		int(11) UNSIGNED NOT NULL REFERENCES users(id),
 				  id_article 	int(11) UNSIGNED NOT NULL REFERENCES articles(id),
 				  star 			tinyint(1) UNSIGNED NOT NULL

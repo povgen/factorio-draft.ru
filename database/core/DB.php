@@ -5,7 +5,6 @@ namespace database\core;
 use PDO;
 use PDOStatement;
 
-require '../db_config.php';
 
 class DB
 {
