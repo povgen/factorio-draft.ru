@@ -1,8 +1,13 @@
 <?php
+require '../core/helper.php';
 require '../core/Route.php';
 require '../controllers/PageController.php';
 require '../database/db_config.php';
 require '../database/core/DB.php';
+require '../models/Article.php';
+
+
+if(!isset($_SESSION)) session_start();
 
 Route::add('/', [PageController::class, 'showIndexPage']);
 Route::add('/admin', [PageController::class, 'showAdminPage']);

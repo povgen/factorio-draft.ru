@@ -4,6 +4,7 @@ class PageController
 {
 	 public function showIndexPage (): void
 	 {
+		 $articles = Article::get();
 		 require '../index.php';
 	 }
 	 public function showAdminPage (): void
