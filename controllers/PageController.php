@@ -4,8 +4,10 @@ class PageController
 {
 	 public function showIndexPage (): void
 	 {
-		 $articles = Article::get();
-		 require '../index.php';
+		$articles = Article::get();
+		echo View::render('index', [
+			'articles' =>  $articles
+		]);
 	 }
 	 public function showAdminPage (): void
 	 {
