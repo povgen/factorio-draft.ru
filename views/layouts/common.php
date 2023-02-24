@@ -2,7 +2,7 @@
 <html>
 <head>
 	<?php require '../blocks/head.php'; ?>
-	<title>Главная</title>
+	<title><?= $title ?></title>
 	<link rel="stylesheet" href="stylesheet/rateForIndex.css">
 </head>
 <body>
