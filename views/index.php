@@ -1,8 +1,6 @@
-<?php View::extends('layouts/common'); ?>'
-
-<?php View::section('title', 'Главная страница'); ?>
-
-<?php View::section('content'); ?>
+@extends('layouts/common')
+@section('title', 'Главная страница')
+@section('content')
     <?php if (!isset($_SESSION['logged_user'])){ require '../blocks/forma.php'; } ?>
     <?php foreach ($articles as $article) : ?>
             <article>
@@ -13,7 +11,8 @@
                     <div><p>Автор: <?= $article->author ?></p></div>
                 </section>
                 <img src="planImg/<?= $article->imgurl ?>">
-                <?= View::render('components/rate', ['rate' => $article->rate]) ?>
+                @render('components/rate', ['rate' => $article->rate])
             </article>
     <?php endforeach; ?>
-<?php View::endSection(); ?>
+@endSection
+

@@ -7,7 +7,7 @@ class PageController
 		$articles = Article::get();
 		echo View::render('index', [
 			'articles' =>  $articles
-		]);
+		], false);
 	 }
 	 public function showAdminPage (): void
 	 {
