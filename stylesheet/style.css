@@ -188,12 +188,12 @@ form button:hover{
 	border-left: 1px solid #FF9F1B;
 	color: black;
 }
-form div {
-
-}
-form span {
+form span|label {
 	color: white;
 	float: left;
+}
+label {
+	cursor: pointer;
 }
 form div {
 	display: block;
@@ -220,7 +220,7 @@ form textarea {
 	resize:vertical;
 	scroll-behavior: unset;
 }
-form label {
+form label.btn {
 	margin: 5px;
 	display: inline-block;
 	color: white;
@@ -240,7 +240,7 @@ form label {
 	padding-top: 2px;
 	padding-bottom: 4px;
 }
-form label:hover{
+form label.btn:hover{
 	background: #FF9F1B;
 	border-top: 1px solid #FF9F1B; 
 	border-left: 1px solid #FF9F1B;
@@ -292,4 +292,11 @@ button:hover{
 .sort button {
 	min-width: 220px;
 	min-height: 24px;
+}
+
+.border-red {
+	border:1px solid red;
+}
+.clear-fix {
+	clear: both;
 }
