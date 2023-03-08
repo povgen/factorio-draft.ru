@@ -25,12 +25,8 @@ class Route
 			return;
 		}
 
-		if (is_array($match)) {
-			[$className, $actionName]  = $match;
-			$controller = new $className();
-			$controller->$actionName($_REQUEST);
-		} else {
-			call_user_func($match, $_REQUEST);
-		}
+		if (is_array($match)) $match[0] = new $match[0]();
+
+		call_user_func($match, $_REQUEST);
 	}
 }
