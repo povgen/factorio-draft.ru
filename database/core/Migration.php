@@ -15,11 +15,11 @@ class Migration
 	}
 
 	public static function getList(bool $is_asc = true): array {
-		self::CreateMigrationTableIfNotExist();
+		self::createMigrationTableIfNotExist();
 		$files = scandir('../migrations/', $is_asc ? 0 : 1);
 		$files = array_filter($files, fn($el) =>  preg_match('/.*\.php/', $el));
 
-		$performed_migrations = DB::run('SELECT * FROM migrations ORDER BY file_name');
+		$performed_migrations = DB::run('SELECT * FROM migrations ORDER BY file_name '.($is_asc ? 'ASC' : 'DESC'));
 		$migration = $performed_migrations->fetch(\PDO::FETCH_ASSOC);
 
 		return array_map(function ($file) use (&$migration, $performed_migrations) {
@@ -35,7 +35,7 @@ class Migration
 		}, $files);
 	}
 
-	private static function CreateMigrationTableIfNotExist(): void
+	private static function createMigrationTableIfNotExist(): void
 	{
 		DB::run("CREATE TABLE IF NOT EXISTS migrations (
     		id int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -72,7 +72,7 @@ class Migration
 
 	public static function rollback(int $count = 0): void
 	{
-		self::CreateMigrationTableIfNotExist();
+		self::createMigrationTableIfNotExist();
 
 		$migrations = DB::run('SELECT * FROM migrations ORDER BY file_name DESC LIMIT '.$count);
 
