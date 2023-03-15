@@ -7,6 +7,7 @@ require '../database/core/DB.php';
 require '../models/Article.php';
 require '../core/View.php';
 require '../limb/connect.php';
+require '../core/Validator.php';
 
 if(!isset($_SESSION)) session_start();
 $_SESSION['url'] = 'http://factorio-draft.ru';
