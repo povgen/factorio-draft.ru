@@ -7,10 +7,10 @@
                 <h1><?= $article->title ?></h1>
                 <a style="cursor:pointer;" href="http://factorio-draft.ru/pages/watch.php?id=<?= $article->id ?>" >Просмотр</a>
                 <section>
-					<?= cutString($article->description, 500) ?>
+					<?= strCut($article->description, 500) ?>
                     <div><p>Автор: <?= $article->author ?></p></div>
                 </section>
-                <img src="planImg/<?= $article->imgurl ?>">
+                <img alt="Изображение чертежа" src="planImg/<?= $article->imgurl ?>">
                 @render('components/rate', ['rate' => $article->rate])
             </article>
     <?php endforeach; ?>
