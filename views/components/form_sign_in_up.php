@@ -37,10 +37,16 @@
 <script>
     const errors = JSON.parse('<?= json_encode($errors) ?>');
 	const message = '<?= $response_message ?>';
-	let alert_str = ''
+	const field_names = {
+	    'name'      : 'Имя',
+	    'login'     : 'Логин',
+	    'password'  : 'Пароль',
+	    'repeat'    : 'Повтор пароля'
+    };
+	let alert_str = '';
     for (let field in errors) {
 		$('#'+field).addClass('border-red');
-		alert_str += '\n' + errors[field];
+		alert_str += '\n' + field_names[field]+ ' - ' + errors[field];
 	}
 	alert(message + alert_str);
 </script>

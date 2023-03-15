@@ -7,36 +7,28 @@ class PageController
 		 $response_message = '';
 		 $errors = [];
 
-		 // Регистрация (начало кода)
 		 if (isset($data['do_signup'])) { // Считываем нажатие кнопки
-			 if (trim($data['name']) == '') { // проверка: поле пусто (имя)
-				 $errors['name'] = 'Укажите имя';
-			 } elseif (strlen($data['name']) < 2) {
-				 $errors['name'] = 'Слишком короткое имя';
-			 }
-			 if (trim($data['login']) == '') {// проверка: поле пусто (логин)
-				 $errors['login'] = 'Укажите логин';
-			 } elseif (R::count('users', "login = ?", [$data['login']]) > 0) {
-				 $errors['login'] = 'Пользователь с данным логином уже зарегистрирован, придумайте другой логин.';
-			 } elseif ((strlen($data['login']) < 4) && !preg_match('/^[A-Za-z0-9_-]+$/', $data['login'])) {
-				 $errors['login'] = 'Логин может содержать только буквы латинского алфавита, цифры, знак подчёркивание или тире (A-Z,a-z,0-9,"_","-"), логин должен содержать 4 и более символа';
-			 }
 
-			 if ($data['password'] == '') {// проверка: поле пусто (1-пароль)
-				 $errors['password'] = 'Введите пароль';
-			 } elseif (strlen($data['password']) < 8) {
-				 $errors['password'] = 'Пароль должен состоять из 8 и более символов.';
-			 }
-
-			 if ($data['password'] != $data['repeat']) { // проверка: совпадают ли пароли (2-пароль)
-				 $errors['repeat'] = 'Повтор пароля не совпадает с основным';
-			 }
+			 // Валидация
+			 $validated = Validator::validate([
+				 'name'  		=> 'required|min:2|max:64',
+				 'login' 		=> 'required|min:2|max:64|login',
+				 'password' 	=> 'required|min:8|max:16|not_trim',
+				 'repeat' 		=> [
+					 'required',
+					 'not_trim',
+					 function ($val, &$msg, $param, $requestData) {
+						 $msg = 'Пароли должны совпадать';
+						 return $requestData['password'] === $val;
+					 }
+				 ]
+			 ], $data, $errors);
 
 			 if (empty($errors)) { //регистрируем ...
 				 $user = R::dispense('users');
-				 $user->name = $data['name'];
-				 $user->login = $data['login'];
-				 $user->password = password_hash($data['password'], PASSWORD_DEFAULT);
+				 $user->name = $validated['name'];
+				 $user->login = $validated['login'];
+				 $user->password = password_hash($validated['password'], PASSWORD_DEFAULT);
 				 R::store($user);
 				 $response_message = 'Вы успешно зарегистрировались.';
 				 $_SESSION['logged_user'] = $user;
@@ -45,7 +37,9 @@ class PageController
 			 }
 		 }// регистрация (конец кода)
 		 if (isset($data['do_login'])) {// авторизация (начало кода)
-			 $user = R::findOne('users', 'login = ?', array($data['login']));// поиск пользователя и присвоение строки массиву user
+
+			 // поиск пользователя и присвоение строки массиву user
+			 $user = R::findOne('users', 'login = ?', array($data['login']));
 
 			 if ($user) {// проверка наличия пользователя
 				 if (password_verify($data['password'], $user->password)) {
