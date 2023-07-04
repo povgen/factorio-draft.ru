@@ -11,7 +11,6 @@ if (isset($_GET['name'])) {
 	$artId = $_GET['article_id'];
 	$catArt = R::load('articles',$artId);
 	$catArt->category_id = $category_id;
-	var_dump($category_id);
 	R::store($catArt);
 	echo "<script>
 	alert('Категория добавлена, запрос удалён, категория статьи изменена');
